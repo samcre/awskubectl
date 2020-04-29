@@ -15,6 +15,12 @@ jobs:
       - name: Build image
         run: docker build --tag samcre/awskubectl:latest .
 
+      - name: Login to DockerHub Registry
+        env:
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: echo ${DOCKER_TOKEN} | docker login -u ${DOCKER_USERNAME} --password-stdin
+
       - name: Docker Publish
         uses: manusa/actions-publish-docker@v1.0.1
         with:
