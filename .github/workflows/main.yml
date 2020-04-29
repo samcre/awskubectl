@@ -2,21 +2,21 @@ name: Build and publish image
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build image
-      run: docker build --tag samcre/awskubectl:latest
+      - uses: actions/checkout@v2
+      - name: Build image
+        run: docker build --tag samcre/awskubectl:latest .
 
-    - name: Docker Publish
-      uses: manusa/actions-publish-docker@v1.0.1
-      with:
-        name: samcre/awskubectl
-        tag: latest
+      - name: Docker Publish
+        uses: manusa/actions-publish-docker@v1.0.1
+        with:
+          name: samcre/awskubectl
+          tag: latest
